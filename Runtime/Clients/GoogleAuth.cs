@@ -12,8 +12,14 @@ namespace Cdm.Authentication.Clients
         {
         }
 
+        public GoogleAuth(Configuration configuration, string accessTokenUrl) : base(configuration)
+        {
+            this.accessTokenUrl = accessTokenUrl;
+        }
+
         public override string authorizationUrl => "https://accounts.google.com/o/oauth2/auth";
-        public override string accessTokenUrl => "https://accounts.google.com/o/oauth2/token";
+        public override string accessTokenUrl { get; } = "https://accounts.google.com/o/oauth2/token";
+
         public string userInfoUrl => "https://www.googleapis.com/oauth2/v1/userinfo";
 
         public async Task<IUserInfo> GetUserInfoAsync(CancellationToken cancellationToken = default)
